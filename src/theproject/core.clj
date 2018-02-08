@@ -11,6 +11,14 @@
 
 ;;> (spit "/tmp/test.json" (json/write-str {:key1 "val1" :key2 "val2"}))
 
+(defn string-keys-to-symbols [map]
+  (reduce #(assoc %1 (-> (key %2) keyword) (val %2)) {} map))
+
+
+
+
+  
+
 
 (defn -main
   "I don't do a whole lot ... yet."
