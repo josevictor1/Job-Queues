@@ -27,23 +27,10 @@
 
 ;;(defn teste [archivepath] (parse-string (slurp archivepath) true))
 
-(def datarecived (read-json-data archivepath))
-
-
-(defn get-agents [coll] (filter (fn [x] (:new_agent x)) coll))
-
-(defn get-jobs [coll] (filter (fn [x] (:new_job x)) coll))
-
-(defn get-jobs-request [coll] (filter (fn [x] (:job_request x)) coll))
-
-(println (get-agents datarecived))
-
-(println (get-jobs datarecived))
-
-(println (get-jobs-request datarecived))
+(println (read-json-data archivepath))
 
 (defn -main
   "I don't do a whole lot ... yet."
-  [& args] 
+  [& args]
   (println "Hello, World!"))
 
