@@ -17,7 +17,7 @@
 ;;(map #(cheshire/parse-string % true)
 ;;(line-seq (clojure.java.io/reader "data/json_data")))
 
-(def archivepath "/Users/josevictorpereiracosta/Documents/secret/jobqueue/resource/sample-input.json")
+(def archivepath "resource/teste.json")
 
 (defn read-archive [path] (slurp path))
 
@@ -41,14 +41,29 @@
 
 ;;(println (get-agents datareceived))
 
-(println (sort-by :urgent (get-jobs datareceived)))
+;;(println (sort-by :urgent (get-jobs datareceived)))
 
-(dequeue [coll-agent coll-job])
+;(println (map (= :urgent true) (get-jobs datareceived)))
+;;(dequeue [coll-agent coll-job])
 
 ;;(println (get-jobs-request datarecived))
 
+(defn is-urgent? [coll] 
+  (if (= ((coll :new_job) :urgent) true) coll))
+
+(defn get-urgent-jobs [coll] 
+  (filter (fn [x] (not= nil x)) (map is-urgent? coll)))
+
+
+  
+
+(print (get-urgent-jobs (get-jobs datareceived)))
+
 (defn -main
   "I don't do a whole lot ... yet."
-  [& args] 
-  (println "Hello, World!"))
+  [& args]
+   
+ ;; (print (apply conj (line-seq (java.io.BufferedReader. *in*))))
+ 
+  )
 
