@@ -2,6 +2,7 @@
   (:gen-class)
   (:require [clojure.data.json :as json])
   (:require [cheshire.core :refer :all])
+  (:require [datomic.api :as d])
 )
 
 ;;hard way
@@ -27,20 +28,24 @@
 
 ;;(defn teste [archivepath] (parse-string (slurp archivepath) true))
 
-(def datarecived (read-json-data archivepath))
+(def datareceived (read-json-data archivepath))
 
 
 (defn get-agents [coll] (filter (fn [x] (:new_agent x)) coll))
 
+
+(println "Jobs queue")
 (defn get-jobs [coll] (filter (fn [x] (:new_job x)) coll))
 
 (defn get-jobs-request [coll] (filter (fn [x] (:job_request x)) coll))
 
-(println (get-agents datarecived))
+;;(println (get-agents datareceived))
 
-(println (get-jobs datarecived))
+(println (sort-by :urgent (get-jobs datareceived)))
 
-(println (get-jobs-request datarecived))
+(dequeue [coll-agent coll-job])
+
+;;(println (get-jobs-request datarecived))
 
 (defn -main
   "I don't do a whole lot ... yet."
