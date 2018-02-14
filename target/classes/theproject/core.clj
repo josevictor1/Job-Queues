@@ -53,6 +53,17 @@
 
 (println (prepare-coll (get-noturgent-jobs (get-jobs datareceived)) (get-urgent-jobs (get-jobs datareceived))))
 
+(defn is-urgent? [coll] 
+  (if (= ((coll :new_job) :urgent) true) coll))
+
+(defn get-urgent-jobs [coll] 
+  (filter (fn [x] (not= nil x)) (map is-urgent? coll)))
+
+
+  
+
+(print (get-urgent-jobs (get-jobs datareceived)))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args] 
