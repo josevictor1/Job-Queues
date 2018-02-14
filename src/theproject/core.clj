@@ -57,14 +57,6 @@
 ;(println (get-noturgent-jobs (get-jobs datareceived)))
 
 
-; (println (:primary_skillset (:new_agent (first (get-agents datareceived)))))
-; (println (empty? (:secondary_skillset (:new_agent (first (get-agents datareceived))))))
-
-
-
-; (println (prepare-coll (get-noturgent-jobs (get-jobs datareceived)) (get-urgent-jobs (get-jobs datareceived))))
-
-
 (defn -main
   "I don't do a whole lot ... yet."
   [& args] 
