@@ -38,9 +38,6 @@
 
 (select-available-agent )
 
-
-
-
 ; (defn get-available-agents [coll_agents :job_request])
   
 ; (defn availa)
