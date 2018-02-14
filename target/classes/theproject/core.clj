@@ -30,11 +30,11 @@
 (defn prepare-coll [urgent_coll noturgent_coll] 
   (into urgent_coll noturgent_coll))
 
-(defn select-agent [coll_agents job_request job_type agent] 
+(defn select-agent [coll_agents job_request job_type] 
   (cond 
     (empty? coll_agents) agent
-    (= (:primary_skillset (:new_agent coll_agents)) job_type) agent
-    (and ())  
+    (= (:primary_skillset (:new_agent (first coll_agents)) job_type)) (first coll_agents)
+    (= (:secondary_skillset ((first coll_agents))) job_type) (first coll_agents) 
 ))
 
 
