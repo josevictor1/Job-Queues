@@ -31,12 +31,23 @@
 
 (defn select-available-agent [coll_jobs_requested coll_agents agents_list] 
   (cond 
-    (or (empty? coll_jobs_requested) (empty? coll_agents)) agents_list
+    (or (empty? coll_jobs_requested) (empty? coll_agents)) 
+      agents_list
     (= (:agent_id (:job_request (first coll_jobs_requested)) (:id (:new_agent (first coll_agents))))) 
       (recur (rest coll_jobs_requested) (rest coll_agents) (conj agents_list (first coll_agents))) 
-    :else (recur coll_jobs_requested (rest coll_agents) agents_list)))
+    :else 
+      (recur coll_jobs_requested (rest coll_agents) agents_list)))
 
-(select-available-agent )
+(defn check-skill [skill_list skill] 
+  (not (nil? (some #{skill} skill_list))))
+
+(defn select-primally-skill [coll_jobs coll_agents] 
+  ())
+
+  
+; (println (check-skill ["asdf" "jklç" "qwer" "poiu"] "jklç"))
+
+; (println (select-available-agent (get-jobs-requested datareceived) (get-agents datareceived) '()))
 
 ; (defn get-available-agents [coll_agents :job_request])
   
