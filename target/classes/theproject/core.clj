@@ -2,8 +2,7 @@
   (:gen-class)
   (:require [clojure.data.json :as json])
   (:require [cheshire.core :refer :all])
-  (:require [datomic.api :as d])
-)
+  (:require [datomic.api :as d]))
 
 (def data_output {:job_assigned {:job_id "job id" :agent_id "agent id"}})
 
@@ -18,7 +17,7 @@
 
 (defn get-jobs [coll] (filter #(:new_job %) coll))
 
-(defn get-jobs-request [coll] (filter #(:job_request %) coll))
+(defn get-jobs-requested [coll] (filter #(:job_request %) coll))
 
 (defn get-urgent-jobs [coll]
   (filter #(= (:urgent (:new_job %)) true) coll))
@@ -30,12 +29,34 @@
 (defn prepare-coll [urgent_coll noturgent_coll] 
   (into urgent_coll noturgent_coll))
 
-(defn select-agent [coll_agents job_request job_type] 
+(defn select-available-agent [coll_jobs_requested coll_agents agents_list] 
   (cond 
-    (empty? coll_agents) agent
-    (= (:primary_skillset (:new_agent (first coll_agents)) job_type)) (first coll_agents)
-    (= (:secondary_skillset ((first coll_agents))) job_type) (first coll_agents) 
-))
+    (or (empty? coll_jobs_requested) (empty? coll_agents)) 
+      agents_list
+    (= (:agent_id (:job_request (first coll_jobs_requested)) (:id (:new_agent (first coll_agents))))) 
+      (recur (rest coll_jobs_requested) (rest coll_agents) (conj agents_list (first coll_agents))) 
+    :else 
+      (recur coll_jobs_requested (rest coll_agents) agents_list)))
+
+(defn check-skill [skill_list skill] 
+  (not (nil? (some #{skill} skill_list))))
+
+(defn select-primally-skill [coll_jobs coll_agents] 
+  ())
+
+  
+; (println (check-skill ["asdf" "jklç" "qwer" "poiu"] "jklç"))
+
+; (println (select-available-agent (get-jobs-requested datareceived) (get-agents datareceived) '()))
+
+; (defn get-available-agents [coll_agents :job_request])
+  
+; (defn availa)
+
+<<<<<<< HEAD
+=======
+; (defn select-agent [coll_agent coll_job_request job] 
+;   (loop []))
 
 
 ; (defn dequeue [coll]
@@ -45,14 +66,7 @@
 ;(println (get-urgent-jobs (get-jobs datareceived)))
 ;(println (get-noturgent-jobs (get-jobs datareceived)))
 
-
-; (println (:primary_skillset (:new_agent (first (get-agents datareceived)))))
-; (println (empty? (:secondary_skillset (:new_agent (first (get-agents datareceived))))))
-
-
-
-(println (prepare-coll (get-noturgent-jobs (get-jobs datareceived)) (get-urgent-jobs (get-jobs datareceived))))
-
+>>>>>>> 4dd44bf9636b8648aca6f0d66036aaaa186d413d
 
 (defn -main
   "I don't do a whole lot ... yet."
