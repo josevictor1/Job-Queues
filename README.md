@@ -52,6 +52,9 @@ we take into account when evaluating the exercise: so if you finish earlier than
 you could improve. Also, if you think the timeframe may not be enough by any reason, don't hesitate to ask for more
 time.
 
+# Requeriments
+*[Leiningen](https://leiningen.org)
+
 ## Usage
 
 FIXME: explanation
@@ -66,9 +69,6 @@ FIXME: listing of options this app accepts.
 
 ...
 
-### Bugs
-
-...
 
 ### Any Other Sections
 ### That You Think
