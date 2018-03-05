@@ -23,7 +23,7 @@
 (defn mountjob_assigned [job agent] (assoc-in {} [:job_assigned] {:job_id (:id (:new_job job)) :agent_id (:id (:new_agent agent))}))
 (defn remove-job [job joblist] (remove #(= job %) joblist))
 (defn filter-job [agt jobs skilllv] (filter #(have-skill? (:type (:new_job  %)) (skilllv (:new_agent  agt))) jobs))
-;asdf
+
 (defn dequeue [coll_jobs coll_agts]
   (loop [jobs coll_jobs agts coll_agts result []]
     (if (or (empty? jobs) (empty? agts)) 
