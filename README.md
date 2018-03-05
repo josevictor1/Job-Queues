@@ -52,22 +52,99 @@ we take into account when evaluating the exercise: so if you finish earlier than
 you could improve. Also, if you think the timeframe may not be enough by any reason, don't hesitate to ask for more
 time.
 
-# Requeriments
+## Requeriments
 * [Leiningen](https://leiningen.org)
 
 ## Usage
 
-FIXME: explanation
-
+To excute the program is necessary to type the command above on the terminal.
     $ cat resource/sample-input.json | lein trampoline run
 
-## Options
+OBS: The "reource/sample-input.jason" is the json file's path.
 
-FIXME: listing of options this app accepts.
+## What I was thinking
+To solve the problem was only to select the available agents (using the function select-available). After that, I dequeued the job's queue according the agents that are available.
+In the following precedence rule it's considered four cases: 
+
+* job is urgent and agent has the primary skill
+* job isn't urgent and agent has the primary skill
+* job is urgent and agent has the secondary skill
+* job isn't urgent and agent has the secondary skill
+
+These rules lead the selection process. The rule's relevance is considered by the given order above. 
 
 ## Examples
 
-...
+ $ cat resource/sample-input.json | lein trampoline run
+ 
+ Input:
+ 
+[
+  {
+    "new_agent": {
+      "id": "8ab86c18-3fae-4804-bfd9-c3d6e8f66260",
+      "name": "BoJack Horseman",
+      "primary_skillset": ["bills-questions"],
+      "secondary_skillset": []
+    }
+  },
+  {
+    "new_job": {
+      "id": "f26e890b-df8e-422e-a39c-7762aa0bac36",
+      "type": "rewards-question",
+      "urgent": false
+    }
+  },
+  {
+    "new_agent": {
+      "id": "ed0e23ef-6c2b-430c-9b90-cd4f1ff74c88",
+      "name": "Mr. Peanut Butter",
+      "primary_skillset": ["rewards-question"],
+      "secondary_skillset": ["bills-questions"]
+    }
+  },
+  {
+    "new_job": {
+      "id": "690de6bc-163c-4345-bf6f-25dd0c58e864",
+      "type": "bills-questions",
+      "urgent": false
+    }
+  },
+  {
+    "new_job": {
+      "id": "c0033410-981c-428a-954a-35dec05ef1d2",
+      "type": "bills-questions",
+      "urgent": true
+    }
+  },
+  {
+    "job_request": {
+      "agent_id": "8ab86c18-3fae-4804-bfd9-c3d6e8f66260"
+    }
+  },
+  {
+    "job_request": {
+      "agent_id": "ed0e23ef-6c2b-430c-9b90-cd4f1ff74c88"
+    }
+  }
+]
+
+ Output:
+ 
+ [
+   {
+     "job_assigned":{
+       "job_id":"c0033410-981c-428a-954a-35dec05ef1d2",
+       "agent_id":"8ab86c18-3fae-4804-bfd9-c3d6e8f66260"
+     }
+   },
+  {
+    "job_assigned":{
+        "job_id":"f26e890b-df8e-422e-a39c-7762aa0bac36",
+        "agent_id":"ed0e23ef-6c2b-430c-9b90-cd4f1ff74c88"
+      }
+    }
+  ]
 
 
 ### Any Other Sections
