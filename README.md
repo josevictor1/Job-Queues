@@ -63,6 +63,8 @@ To excute the program is necessary to type the command above on the terminal.
 
 OBS: The "reource/sample-input.jason" is the json file's path.
 
+It is possible to read the input file without entering the path on the command line. Uncomment lines 5 and 41 and comment line 42.
+
 ## What I was thinking
 To solve the problem was only to select the available agents (using the function select-available). After that, I dequeued the job's queue according the agents that are available.
 In the following precedence rule it's considered four cases: 
