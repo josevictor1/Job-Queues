@@ -1,10 +1,8 @@
 (ns theproject.core
   (:gen-class)
   (:require [cheshire.core :refer :all]))   
-;Reading of the resource directory:  
+ 
 ;(defn read-json-data [archivepath] (parse-string (slurp archivepath) true))
-;(def datareceived (vec (read-json-data "resource/teste.json")))
-
 (defn get-agents [coll] (filter #(:new_agent %) coll))
 (defn get-jobs [coll] (filter #(:new_job %) coll))
 (defn get-jobs-requested [coll] (filter #(:job_request %) coll))
@@ -39,6 +37,8 @@
 
 (defn -main
   [& args] 
+  ;Reading of the resource directory: 
+  ;(def datareceived (vec (read-json-data "resource/teste.json")))
   (def datareceived (parse-string (slurp *in*) true))
   (def jobs (into (get-jobs-unu datareceived false) (get-jobs-unu datareceived true)))
   (def agents (select-available-agent (get-jobs-requested datareceived) (get-agents datareceived) []))
