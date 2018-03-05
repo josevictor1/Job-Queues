@@ -1,8 +1,7 @@
 (ns theproject.core
   (:gen-class)
-  (:require [cheshire.core :refer :all])
-  (:require [datomic.api :as d]))
-;Read of the resource directory:  
+  (:require [cheshire.core :refer :all]))  
+;Reading of the resource directory:  
 ;(defn read-json-data [archivepath] (parse-string (slurp archivepath) true))
 ;(def datareceived (vec (read-json-data "resource/teste.json")))
 
@@ -20,7 +19,7 @@
     :else 
       (recur coll_jobs_requested (rest coll_agents) agents_list)))
 
-(defn have-skill? [skill agt-skilllist] (some? (some #{skill} agt-skilllist)))
+(defn have-skill? [skill agt_skilllist] (some? (some #{skill} agt_skilllist)))
 (defn filter-agent[job agents skilllv] (filter #(have-skill? (:type (:new_job  job)) (skilllv (:new_agent  %))) agents))    
 (defn remove-agent [agent agentlist] (remove #(= agent %) agentlist))    
 (defn mountjob_assigned [job agent] (assoc-in {} [:job_assigned] {:job_id (:id (:new_job job)) :agent_id (:id (:new_agent agent))}))
