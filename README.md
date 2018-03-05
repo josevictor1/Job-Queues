@@ -39,7 +39,7 @@ Also, pay attention to code organization and make sure it is readable and clean.
 
 You should deliver a git repository with your code and a short README file outlining the solution and explaining how to
 build and run the code, we just ask that you keep your repository private (GitLab and BitBucket offer free private
-repositories). You should deliver your code in a functional programming language — Clojure, Haskell, Elixir and Scala
+repositories). You should deliver your code in a functional programming language - Clojure, Haskell, Elixir and Scala
 are acceptable.
 
 We also consider that this might be your first tackle on a functional language, so it's ok if your code is not
@@ -81,7 +81,7 @@ FIXME: listing of options this app accepts.
 
 ## License
 
-Copyright © 2018 FIXME
+Copyright ï¿½ 2018 FIXME
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
