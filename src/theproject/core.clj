@@ -1,11 +1,9 @@
 (ns theproject.core
   (:gen-class)
   (:require [cheshire.core :refer :all])
-  (:require [datomic.api :as d])
-  (:require [clojure.data.json :as json]))
-
-; (defn read-json-data [archivepath] 
-;   (parse-string (slurp archivepath) true))
+  (:require [datomic.api :as d]))
+;Read of the resource directory:  
+;(defn read-json-data [archivepath] (parse-string (slurp archivepath) true))
 ;(def datareceived (vec (read-json-data "resource/teste.json")))
 
 (defn get-agents [coll] (filter #(:new_agent %) coll))
@@ -22,18 +20,10 @@
     :else 
       (recur coll_jobs_requested (rest coll_agents) agents_list)))
 
-(defn have-skill? [skill agt-skilllist] 
-  (some? (some #{skill} agt-skilllist)))
-
-(defn filter-agent[job agents skilllv] 
-  (filter #(have-skill? (:type (:new_job  job)) (skilllv (:new_agent  %))) agents))    
-
-(defn remove-agent [agent agentlist] 
-  (remove #(= agent %) agentlist))    
-
-(defn mountjob_assigned [job agent] 
-  (assoc-in {} [:job_assigned] 
-    {:job_id (:id (:new_job job)) :agent_id (:id (:new_agent agent))}))
+(defn have-skill? [skill agt-skilllist] (some? (some #{skill} agt-skilllist)))
+(defn filter-agent[job agents skilllv] (filter #(have-skill? (:type (:new_job  job)) (skilllv (:new_agent  %))) agents))    
+(defn remove-agent [agent agentlist] (remove #(= agent %) agentlist))    
+(defn mountjob_assigned [job agent] (assoc-in {} [:job_assigned] {:job_id (:id (:new_job job)) :agent_id (:id (:new_agent agent))}))
 
 (defn dequeue [coll_jobs coll_agts]
   (loop [jobs coll_jobs agts coll_agts result []]
@@ -50,13 +40,9 @@
 
 (defn -main
   [& args] 
-
   (def datareceived (parse-string (slurp *in*) true))
   (def jobs (into (get-jobs-unu datareceived false) (get-jobs-unu datareceived true)))
   (def agents (select-available-agent (get-jobs-requested datareceived) (get-agents datareceived) []))
   (def result (dequeue jobs agents))
   (println (generate-string result))
   (generate-stream result (clojure.java.io/writer "/Users/josevictorpereiracosta/Documents/secret/jobqueue/resource/result.json")))
-
-
-
