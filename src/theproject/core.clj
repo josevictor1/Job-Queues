@@ -56,10 +56,7 @@
   (def agents (select-available-agent (get-jobs-requested datareceived) (get-agents datareceived) []))
   (def result (dequeue jobs agents))
   (println (generate-string result))
-  ;(generate-stream result (clojure.java.io/writer "/resource/result.json"))
-
-  (generate-stream result (clojure.java.io/writer "/Users/josevictorpereiracosta/Documents/secret/jobqueue/resource/result.json"))
-)
+  (generate-stream result (clojure.java.io/writer "/Users/josevictorpereiracosta/Documents/secret/jobqueue/resource/result.json")))
 
 
 
