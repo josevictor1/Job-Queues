@@ -1,6 +1,6 @@
 (ns theproject.core
   (:gen-class)
-  (:require [cheshire.core :refer :all]))  
+  (:require [cheshire.core :refer :all]))   
 ;Reading of the resource directory:  
 ;(defn read-json-data [archivepath] (parse-string (slurp archivepath) true))
 ;(def datareceived (vec (read-json-data "resource/teste.json")))
@@ -19,23 +19,23 @@
     :else 
       (recur coll_jobs_requested (rest coll_agents) agents_list)))
 
-(defn have-skill? [skill agt_skilllist] (some? (some #{skill} agt_skilllist)))
-(defn filter-agent[job agents skilllv] (filter #(have-skill? (:type (:new_job  job)) (skilllv (:new_agent  %))) agents))    
-(defn remove-agent [agent agentlist] (remove #(= agent %) agentlist))    
+(defn have-skill? [skill agt_skilllist] (some? (some #{skill} agt_skilllist)))        
 (defn mountjob_assigned [job agent] (assoc-in {} [:job_assigned] {:job_id (:id (:new_job job)) :agent_id (:id (:new_agent agent))}))
+(defn remove-job [job joblist] (remove #(= job %) joblist))
+(defn filter-job [agt jobs skilllv] (filter #(have-skill? (:type (:new_job  %)) (skilllv (:new_agent  agt))) jobs))
 
 (defn dequeue [coll_jobs coll_agts]
   (loop [jobs coll_jobs agts coll_agts result []]
     (if (or (empty? jobs) (empty? agts)) 
       result
-      (let [primary (filter-agent (first jobs) agts :primary_skillset) secondary (filter-agent (first jobs) agts :secondary_skillset)] 
+      (let [primary (filter-job (first agts) jobs :primary_skillset) secondary (filter-job (first agts) jobs :secondary_skillset)] 
         (cond 
           (= (empty? primary) false) 
-            (recur (rest jobs) (remove-agent (first primary) agts) (conj result (mountjob_assigned (first jobs) (first primary))))
-          (and (= (empty? primary) true) (= (empty? primary) false))
-            (recur (rest jobs) (remove-agent (first secondary) agts) (conj result (mountjob_assigned (first jobs) (first primary))))
+            (recur (remove-job (first primary) jobs) (rest agts) (conj result (mountjob_assigned (first primary) (first agts))))
+          (and (= (empty? primary) true) (= (empty? secondary) false))
+            (recur (remove-job (first secondary) jobs) (rest agts) (conj result (mountjob_assigned (first secondary) (first agts))))
           :else
-            (recur (rest jobs)  agts result))))))
+            (recur jobs (rest agts) result))))))
 
 (defn -main
   [& args] 
