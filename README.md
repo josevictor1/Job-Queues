@@ -53,7 +53,7 @@ you could improve. Also, if you think the timeframe may not be enough by any rea
 time.
 
 # Requeriments
-*[Leiningen](https://leiningen.org)
+* [Leiningen](https://leiningen.org)
 
 ## Usage
 
