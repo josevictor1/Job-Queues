@@ -52,16 +52,11 @@ we take into account when evaluating the exercise: so if you finish earlier than
 you could improve. Also, if you think the timeframe may not be enough by any reason, don't hesitate to ask for more
 time.
 
-
-## Installation
-
-Download from http://example.com/FIXME.
-
 ## Usage
 
 FIXME: explanation
 
-    $ java -jar theproject-0.1.0-standalone.jar [args]
+    $ cat resource/sample-input.json | lein trampoline run
 
 ## Options
 
