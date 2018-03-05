@@ -58,6 +58,7 @@ time.
 ## Usage
 
 To excute the program is necessary to type the command above on the terminal.
+
     $ cat resource/sample-input.json | lein trampoline run
 
 OBS: The "reource/sample-input.jason" is the json file's path.
@@ -152,7 +153,6 @@ These rules lead the selection process. The rule's relevance is considered by th
 
 ## License
 
-Copyright � 2018 FIXME
+Copyright � 2018 
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License either version 1.0.
