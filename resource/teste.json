@@ -15,11 +15,12 @@
       }
     },
     {
-        "new_job": {
-          "id": "t2e6s8t9e0-df8e-422e-a39c-7762aa0bac36-ahjdbk3t56",
-          "type": "rewards-question",
-          "urgent": true
-        }
+      "new_agent": {
+        "id": "ed1e22ef-6c2b-410c-9b90-cd4f1ff75c88",
+        "name": "Mr. Peanut Butter",
+        "primary_skillset": [],
+        "secondary_skillset": ["rewards-question"]
+      }
     },
     {
       "new_agent": {
