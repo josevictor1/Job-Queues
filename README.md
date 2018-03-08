@@ -130,8 +130,8 @@ These rules lead the selection process. The rule's relevance is considered by th
         "agent_id": "ed0e23ef-6c2b-430c-9b90-cd4f1ff74c88"
       }
     }
-  ]
-
+  ]
+```
  Output:
  ```
   [
