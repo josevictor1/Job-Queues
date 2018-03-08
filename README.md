@@ -81,8 +81,8 @@ These rules lead the selection process. The rule's relevance is considered by th
  $ cat resource/sample-input.json | lein trampoline run
  
  Input:
- 
-  [
+ ```
+  [
     {
       "new_agent": {
         "id": "8ab86c18-3fae-4804-bfd9-c3d6e8f66260",
@@ -133,8 +133,8 @@ These rules lead the selection process. The rule's relevance is considered by th
   ]
 
  Output:
- 
-   [
+ ```
+  [
      {
        "job_assigned":{
          "job_id":"c0033410-981c-428a-954a-35dec05ef1d2",
@@ -148,6 +148,7 @@ These rules lead the selection process. The rule's relevance is considered by th
         }
       }
     ]
+ 
 
 
 ### Tool's
