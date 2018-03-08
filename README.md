@@ -148,8 +148,7 @@ These rules lead the selection process. The rule's relevance is considered by th
         }
       }
     ]
- 
-
+ ```
 
 ### Tool's
 * [Cheshire](https://github.com/dakrone/cheshire)
